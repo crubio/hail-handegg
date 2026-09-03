@@ -1,0 +1,30 @@
+league:
+  name: "My League"
+  num_teams: 12
+  draft_style: snake
+  draft_position: 1  # update before draft day
+  scoring: ppr
+
+roster_slots:
+  QB: 1
+  RB: 2
+  WR: 2
+  TE: 1
+  FLEX: 1  # RB/WR/TE
+  K: 1
+  DST: 1
+  BN: 6   # bench spots
+
+# Heuristic scoring weights (must sum to 1.0)
+weights:
+  adp: 0.30
+  projection: 0.30
+  wopr: 0.15
+  xfp: 0.10
+  hvt: 0.10
+  adp_trend: 0.05
+
+data:
+  cache_dir: data/raw
+  processed_dir: data/processed
+  sleeper_cache_ttl_hours: 6
