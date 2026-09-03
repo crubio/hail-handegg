@@ -8,7 +8,7 @@ class DraftBoardScreen(Screen):
     def compose(self):
         yield Header()
         yield DataTable(id="player-table")
-        yield Input(placeholder="Enter picked player name...", id="pick-input")
+        yield Input(placeholder="Add your pick (player name)...", id="pick-input")
         yield Footer()
 
     def on_mount(self) -> None:
