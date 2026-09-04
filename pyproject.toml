@@ -11,3 +11,6 @@ dependencies = [
     "requests>=2.34.2",
     "textual>=8.2.8",
 ]
+
+[project.scripts]
+hail-handegg = "tui.app:run"

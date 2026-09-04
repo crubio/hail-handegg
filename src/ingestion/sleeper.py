@@ -26,6 +26,24 @@ def fetch_trending_adds(lookback_hours: int = 24, limit: int = 25) -> pd.DataFra
     return pd.DataFrame(resp.json())
 
 
+def fetch_id_bridge(ttl_hours: float = 24) -> pd.DataFrame:
+    """Return a DataFrame with player_id (GSIS) and sleeper_id columns.
+    Built from the Sleeper player map which carries gsis_id for most active players."""
+    cached = load_df("sleeper_id_bridge", ttl_hours)
+    if cached is not None:
+        return cached
+
+    player_map = fetch_player_map(ttl_hours)
+    rows = [
+        {"player_id": p["gsis_id"], "sleeper_id": pid}
+        for pid, p in player_map.items()
+        if p.get("gsis_id") and p.get("active")
+    ]
+    df = pd.DataFrame(rows).drop_duplicates("player_id")
+    save_df("sleeper_id_bridge", df)
+    return df
+
+
 def fetch_adp(ttl_hours: float = 6) -> pd.DataFrame:
     # Sleeper has no public ADP REST endpoint; search_rank from the player map
     # is their internal draft-order proxy and correlates well with ADP.
