@@ -95,6 +95,9 @@ def build_player_pool(
     # --- 5. injury risk multiplier ---
     df["injury_risk"] = compute_injury_risk(df)
 
+    # drop duplicates introduced by name-based merge fallbacks
+    df = df.drop_duplicates("player_id", keep="first")
+
     return df
 
 

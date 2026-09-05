@@ -164,13 +164,12 @@ class DraftBoardScreen(Screen):
             })
         pd.DataFrame(roster_rows).to_csv(roster_path, index=False)
 
-        ref_path = out_dir / "hail-handegg-top300.csv"
+        ref_path = out_dir / "hail-handegg-rankings.csv"
         drafted = self._session.all_drafted_ids()
         pool = self._scored_df[~self._scored_df["player_id"].isin(drafted)].copy()
 
         h_ranked = (
             pool.sort_values("score", ascending=False)
-            .head(300)
             .reset_index(drop=True)
         )
         h_ranked["Heuristic Rank"] = h_ranked.index + 1
@@ -334,7 +333,7 @@ class DraftBoardScreen(Screen):
         h_table = self.query_one("#heuristic-table", DataTable)
         h_table.clear(columns=True)
         h_table.add_columns(*self._col_labels(_HEURISTIC_COLS, _H_COL_MAP, self._h_sort))
-        h_sorted = self._apply_sort(recs, self._h_sort, "score").head(50)
+        h_sorted = self._apply_sort(recs, self._h_sort, "score")
         for _, row in h_sorted.iterrows():
             h_table.add_row(
                 str(int(row["h_rank"])),
@@ -349,7 +348,7 @@ class DraftBoardScreen(Screen):
         ml_table.clear(columns=True)
         if self._has_ml:
             ml_table.add_columns(*self._col_labels(_ML_COLS, _ML_COL_MAP, self._ml_sort))
-            ml_sorted = self._apply_sort(recs, self._ml_sort, "ml_score").head(50)
+            ml_sorted = self._apply_sort(recs, self._ml_sort, "ml_score")
             for _, row in ml_sorted.iterrows():
                 ml_table.add_row(
                     str(int(row["ml_rank"])),

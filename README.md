@@ -58,7 +58,7 @@ make train
 - **Undo**  `ctrl+z` undo functionality (for roster & off-board picks)
 - **Roster needs panel**  tracks remaining open slots with FLEX/BN logic; snake draft only
 - **Column sorting**  click any column header to sort; click again to toggle direction; click Rank to reset
-- **CSV export**  `ctrl+e` writes your current roster and a top-300 reference sheet (with both rankings) to `data/raw/`
+- **CSV export**  `ctrl+e` writes your current roster and a full reference sheet (all available players, both rankings) to `data/raw/`
 
 ---
 

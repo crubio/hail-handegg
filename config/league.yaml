@@ -11,8 +11,6 @@ roster_slots:
   WR: 2
   TE: 1
   FLEX: 1  # RB/WR/TE
-  K: 1
-  DST: 1
   BN: 6   # bench spots
   IR: # injury reserve
 
